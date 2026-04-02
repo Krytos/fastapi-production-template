@@ -1,5 +1,7 @@
 """Structured logging configuration using loguru."""
 
+from __future__ import annotations
+
 import sys
 from typing import TYPE_CHECKING
 
@@ -11,7 +13,7 @@ if TYPE_CHECKING:
     from loguru import Record
 
 
-def _inject_request_id(record: "Record") -> None:
+def _inject_request_id(record: Record) -> None:
     record["extra"]["request_id"] = get_request_id()
 
 

@@ -71,6 +71,7 @@ env_list = lint, type, unit, integration, coverage
 [testenv]
 package = editable
 deps =
+    aiosqlite>=0.21.0
     pytest>=8.3.0
     pytest-cov>=6.1.0
     httpx>=0.28.0
