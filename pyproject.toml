@@ -64,42 +64,36 @@ fail_under = 100
 show_missing = true
 
 [tool.tox]
-legacy_tox_ini = """
-[tox]
-env_list = lint, type, unit, integration, coverage
+requires = ["tox>=4.24.0"]
+env_list = ["lint", "type", "unit", "integration", "coverage"]
 
-[testenv]
-package = editable
-deps =
-    aiosqlite>=0.21.0
-    pytest>=8.3.0
-    pytest-cov>=6.1.0
-    httpx>=0.28.0
-    ruff>=0.12.0
-    ty>=0.0.1a17
+[tool.tox.env_run_base]
+package = "editable"
+deps = [
+    "aiosqlite>=0.21.0",
+    "pytest>=8.3.0",
+    "pytest-cov>=6.1.0",
+    "httpx>=0.28.0",
+    "ruff>=0.12.0",
+    "ty>=0.0.1a17",
+]
 
-[testenv:lint]
-description = Run Ruff lint checks
-commands =
-    ruff check .
+[tool.tox.env.lint]
+description = "Run Ruff lint checks"
+commands = [["ruff", "check", "."]]
 
-[testenv:type]
-description = Run type checks
-commands =
-    ty check .
+[tool.tox.env.type]
+description = "Run type checks"
+commands = [["ty", "check", "."]]
 
-[testenv:unit]
-description = Run unit tests
-commands =
-    pytest tests/unit
+[tool.tox.env.unit]
+description = "Run unit tests"
+commands = [["pytest", "tests/unit"]]
 
-[testenv:integration]
-description = Run integration tests
-commands =
-    pytest tests/integration
+[tool.tox.env.integration]
+description = "Run integration tests"
+commands = [["pytest", "tests/integration"]]
 
-[testenv:coverage]
-description = Run coverage gate
-commands =
-    pytest --cov=src --cov-branch --cov-report=term-missing --cov-fail-under=100
-"""
+[tool.tox.env.coverage]
+description = "Run coverage gate"
+commands = [["pytest", "--cov=src", "--cov-branch", "--cov-report=term-missing", "--cov-fail-under=100"]]
