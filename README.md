@@ -3,7 +3,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/ci.yml?branch=main&label=ci-cd)](https://github.com/Krytos/fastapi-production-template/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/tests.yml?branch=main&label=tests)](https://github.com/Krytos/fastapi-production-template/actions/workflows/tests.yml)
 [![PyPI version](https://img.shields.io/pypi/v/fastapi-production-template)](https://pypi.org/project/fastapi-production-template/)
-[![Python versions](https://img.shields.io/pypi/pyversions/fastapi-production-template)](https://pypi.org/project/fastapi-production-template/)
+[![Python](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fpypi.org%2Fpypi%2Ffastapi-production-template%2Fjson&query=%24.info.requires_python&label=python&color=3776AB)](https://pypi.org/project/fastapi-production-template/)
 [![Coverage gate](https://img.shields.io/badge/coverage%20gate-100%25-brightgreen)](https://github.com/Krytos/fastapi-production-template/blob/main/pyproject.toml)
 [![Code style: Ruff](https://img.shields.io/badge/lint-ruff-46a758)](https://github.com/astral-sh/ruff)
 [![Type checking: Ty](https://img.shields.io/badge/types-ty-0f172a)](https://github.com/astral-sh/ty)
