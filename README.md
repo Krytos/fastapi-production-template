@@ -1,127 +1,144 @@
-# FastAPI Production Template
+<div align="center">
 
-[![CI](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/ci.yml?branch=main&label=ci-cd)](https://github.com/Krytos/fastapi-production-template/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/tests.yml?branch=main&label=tests)](https://github.com/Krytos/fastapi-production-template/actions/workflows/tests.yml)
-[![PyPI version](https://img.shields.io/pypi/v/fastapi-production-template)](https://pypi.org/project/fastapi-production-template/)
-[![Python](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fpypi.org%2Fpypi%2Ffastapi-production-template%2Fjson&query=%24.info.requires_python&label=python&color=3776AB)](https://pypi.org/project/fastapi-production-template/)
-[![Coverage gate](https://img.shields.io/badge/coverage%20gate-100%25-brightgreen)](https://github.com/Krytos/fastapi-production-template/blob/main/pyproject.toml)
-[![Code style: Ruff](https://img.shields.io/badge/lint-ruff-46a758)](https://github.com/astral-sh/ruff)
-[![Type checking: Ty](https://img.shields.io/badge/types-ty-0f172a)](https://github.com/astral-sh/ty)
-[![Publish: PyPI](https://img.shields.io/badge/publish-pypi-blue)](https://github.com/Krytos/fastapi-production-template/blob/main/.github/workflows/ci.yml)
-[![Package manager: uv](https://img.shields.io/badge/package%20manager-uv-DE5FE9)](https://github.com/astral-sh/uv)
-[![Framework: FastAPI](https://img.shields.io/badge/framework-fastapi-009688)](https://fastapi.tiangolo.com/)
-[![ORM: SQLAlchemy](https://img.shields.io/badge/orm-sqlalchemy-d71f00)](https://www.sqlalchemy.org/)
-[![Database: PostgreSQL](https://img.shields.io/badge/database-postgresql-336791)](https://www.postgresql.org/)
-[![Infra: Terraform](https://img.shields.io/badge/infra-terraform-844FBA)](https://www.terraform.io/)
-[![Container: Docker](https://img.shields.io/badge/container-docker-2496ED)](https://www.docker.com/)
+# ⚡ FastAPI Production Template
 
-[![Open for Freelance](https://img.shields.io/badge/open%20for-freelance%20projects-success)](mailto:kevin@meinon.de?subject=FastAPI%20Freelance%20Inquiry)
-[![Hire Me](https://img.shields.io/badge/hire%20me-fastapi%20backend-0ea5e9)](mailto:kevin@meinon.de?subject=Backend%20Project%20Inquiry)
-[![Contact](https://img.shields.io/badge/contact-kevin%40meinon.de-blue)](mailto:kevin@meinon.de)
+**Battle-tested Python backend architecture — ready to ship.**
 
-Production-ready FastAPI starter focused on clean architecture, strict quality gates, and cloud-ready infrastructure baselines.
+*By [Kevin Meinon](mailto:kevin@meinon.de) · Freelance Backend Engineer*
+
+<br/>
+
+[![CI](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/ci.yml?branch=main&label=CI%2FCD&style=for-the-badge)](https://github.com/Krytos/fastapi-production-template/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/tests.yml?branch=main&label=Tests&style=for-the-badge)](https://github.com/Krytos/fastapi-production-template/actions/workflows/tests.yml)
+[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen?style=for-the-badge)](https://github.com/Krytos/fastapi-production-template/blob/main/pyproject.toml)
+[![PyPI](https://img.shields.io/pypi/v/fastapi-production-template?style=for-the-badge&label=PyPI)](https://pypi.org/project/fastapi-production-template/)
+
+<br/>
+
+[![Python 3.14](https://img.shields.io/badge/Python-3.14-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=flat-square&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
+[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
+[![GCP](https://img.shields.io/badge/GCP-4285F4?style=flat-square&logo=googlecloud&logoColor=white)](https://cloud.google.com/)
+[![uv](https://img.shields.io/badge/uv-DE5FE9?style=flat-square&logo=astral&logoColor=white)](https://github.com/astral-sh/uv)
+[![Ruff](https://img.shields.io/badge/Ruff-46a758?style=flat-square)](https://github.com/astral-sh/ruff)
+
+<br/>
+
+**→ [Available for freelance projects](mailto:kevin@meinon.de?subject=FastAPI%20Freelance%20Inquiry) ←**
+
+</div>
+
+---
+
+## About
+
+I'm **Kevin Meinon**, a freelance backend engineer specialising in Python and production-grade API systems — primarily **FastAPI**, but equally at home with **Flask** and **Django** depending on what the project calls for.
+
+This template is a living showcase of the architecture patterns and engineering standards I bring to every engagement — not boilerplate to fill in, but a reference for what production-ready actually looks like.
+
+**What I build:**
+- High-throughput REST & async APIs with clean domain separation
+- End-to-end CI pipelines with strict quality gates (lint, types, coverage)
+- Cloud-portable infrastructure baselines (AWS / Azure / GCP)
+- Systems that are easy for your team to own after I'm done
+
+If your team needs a backend that ships fast and holds up — [let's talk](mailto:kevin@meinon.de).
+
+---
+
+## What this demonstrates
+
+| Concern | Approach |
+|---|---|
+| **Architecture** | App factory, versioned routes, repository pattern, domain layer separation — framework-agnostic patterns that port cleanly to Flask or Django |
+| **Data layer** | SQLAlchemy async ORM + asyncpg + dependency-injected sessions |
+| **Auth** | API key middleware (`X-API-Key`) with per-route enforcement |
+| **Observability** | Structured JSON logging, request ID propagation, Prometheus-style metrics |
+| **Quality** | 100% coverage gate, Ruff linting, Ty type checking, pre-commit hooks |
+| **Infrastructure** | Terraform modules for ECR (AWS), ACR (Azure), GAR (GCP) |
+| **Dev experience** | Docker Compose with hot-reload dev profile, full local parity |
+
+---
 
 ## Tech stack
 
-- Python 3.14
-- FastAPI + Pydantic v2
-- SQLAlchemy async + asyncpg
-- UV package management
-- Ruff + Ty + Pytest
-- Docker + Docker Compose
-- Terraform (AWS, Azure, GCP)
-- GitHub Actions CI
+- **Runtime:** Python 3.14
+- **Framework:** FastAPI + Pydantic v2 · Flask · Django
+- **Database:** PostgreSQL · SQLAlchemy async · asyncpg
+- **Tooling:** uv · Ruff · Ty · pytest · tox
+- **Infrastructure:** Docker · Docker Compose · Terraform (AWS / Azure / GCP)
+- **CI/CD:** GitHub Actions
 
-## What is included
+> The FastAPI layer is intentionally thin and architecturally isolated — swapping it for Flask or Django is a configuration change, not a rewrite.
 
-- App factory setup with versioned API routes (`/api/v1`)
-- Typed request/response models and domain layer separation
-- SQLAlchemy async ORM + repository-backed document workflows
-- PoC-mode DB lifecycle wiring with dependency injection and startup schema creation
-- API key auth (`X-API-Key`) for document endpoints
-- Structured JSON logging + request ID middleware (`X-Request-ID`)
-- Lightweight Prometheus-style metrics endpoint
-- Quality checks wired for linting, typing, tests, and coverage gate
-- Terraform starter modules for container registry setup:
-  - AWS ECR
-  - Azure Container Registry
-  - GCP Artifact Registry
+---
 
-## API endpoints
+## API surface
+```
+GET    /api/v1/health                       # public
+GET    /api/v1/metrics                      # public
+POST   /api/v1/documents/analyze            # requires X-API-Key
+POST   /api/v1/documents                    # requires X-API-Key
+GET    /api/v1/documents                    # requires X-API-Key
+GET    /api/v1/documents/{document_id}      # requires X-API-Key
+PUT    /api/v1/documents/{document_id}      # requires X-API-Key
+DELETE /api/v1/documents/{document_id}      # requires X-API-Key
+```
 
-- `GET /api/v1/health`
-- `GET /api/v1/metrics`
-- `POST /api/v1/documents/analyze`
-- `POST /api/v1/documents`
-- `GET /api/v1/documents`
-- `GET /api/v1/documents/{document_id}`
-- `PUT /api/v1/documents/{document_id}`
-- `DELETE /api/v1/documents/{document_id}`
-
-`/health` and `/metrics` are public. All `/documents*` routes require `X-API-Key`.
+---
 
 ## Local development
-
 ```bash
 uv sync --all-groups
 uv run uvicorn fastapi_production_template.main:app --reload
 ```
-
-Example authenticated request:
-
 ```bash
 curl -H "X-API-Key: dev-api-key" http://localhost:8000/api/v1/documents
 ```
 
-## Tests and quality gates
-
+## Quality gates
 ```bash
-uv run pytest
-uv run ruff check .
-uv run ty check .
-uv run tox
+uv run pytest          # tests + coverage
+uv run ruff check .    # linting
+uv run ty check .      # type checking
+uv run tox             # full gate
 ```
-
-Pre-commit hooks (Ruff, unit tests, Terraform fmt check):
-
 ```bash
 uv run pre-commit install
 uv run pre-commit run --all-files
 ```
 
 ## Docker
-
-Standard compose setup:
-
 ```bash
 docker compose up --build
-```
 
-Dev profile with file watching (`src`, `tests`, `pyproject.toml`):
-
-```bash
+# Dev profile with hot reload
 docker compose --profile dev up --build --watch api-dev postgres
 ```
 
-## Terraform validation
-
+## Terraform
 ```bash
-terraform -chdir=infra/terraform-aws init
-terraform -chdir=infra/terraform-aws validate
-terraform -chdir=infra/terraform-azure init
-terraform -chdir=infra/terraform-azure validate
-terraform -chdir=infra/terraform-gcp init
-terraform -chdir=infra/terraform-gcp validate
+terraform -chdir=infra/terraform-aws   init && validate
+terraform -chdir=infra/terraform-azure init && validate
+terraform -chdir=infra/terraform-gcp   init && validate
 ```
 
-## Freelance work
+---
 
-I am Kevin Meinon, a freelance backend developer focused on Python/FastAPI, API architecture, and production hardening.
+<div align="center">
 
-If your team needs support with:
-- backend feature delivery
-- API performance and reliability
-- test strategy and CI quality gates
-- cloud deployment foundations
+## Hire me
 
-Reach out at `kevin@meinon.de`.
+**I'm available for backend contracts and freelance projects.**
+
+Backend feature delivery · API performance & reliability · CI quality gates · Cloud deployment
+
+[kevin@meinon.de](mailto:kevin@meinon.de?subject=Backend%20Project%20Inquiry)
+
+</div>
