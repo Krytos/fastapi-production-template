@@ -67,13 +67,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.14"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
       - name: Install tox
-        run: python -m pip install --upgrade pip tox
+        run: uv tool install tox
 
       - name: Run tox
         run: tox
@@ -130,11 +128,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.14"
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
