@@ -1,6 +1,5 @@
 """Simple in-memory Prometheus-like metrics store."""
 
-
 from dataclasses import dataclass, field
 from threading import Lock
 
@@ -43,9 +42,7 @@ class MetricsStore:
         ]
         with self._lock:
             for (method, path, status), stats in sorted(self.requests.items()):
-                lines.append(
-                    f'http_requests_total{{method="{method}",path="{path}",status="{status}"}} {stats.count}'
-                )
+                lines.append(f'http_requests_total{{method="{method}",path="{path}",status="{status}"}} {stats.count}')
             lines.extend(
                 [
                     "# HELP http_request_duration_seconds_total Cumulative HTTP request duration in seconds",
@@ -54,7 +51,7 @@ class MetricsStore:
             )
             for (method, path, status), stats in sorted(self.requests.items()):
                 lines.append(
-                    'http_request_duration_seconds_total'
+                    "http_request_duration_seconds_total"
                     f'{{method="{method}",path="{path}",status="{status}"}} '
                     f"{stats.total_duration_seconds:.6f}"
                 )

@@ -31,6 +31,7 @@ class RequestIdMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next) -> Response:
         request_id = request.headers.get("X-Request-ID") or str(uuid4())
         token = _request_id_ctx.set(request_id)
+        route_path = request.url.path
 
         start = perf_counter()
         self._metrics.increment_in_flight()
@@ -39,17 +40,20 @@ class RequestIdMiddleware(BaseHTTPMiddleware):
         try:
             response = await call_next(request)
             status_code = response.status_code
+            route = request.scope.get("route")
+            if route is not None and hasattr(route, "path"):
+                route_path = str(route.path)
         finally:
             duration = perf_counter() - start
             self._metrics.observe(
                 method=request.method,
-                path=request.url.path,
+                path=route_path,
                 status_code=status_code,
                 duration_seconds=duration,
             )
             self._metrics.decrement_in_flight()
-            _request_id_ctx.reset(token)
 
         response.headers["X-Request-ID"] = request_id
         logger.info("{} {} {}", request.method, request.url.path, response.status_code)
+        _request_id_ctx.reset(token)
         return response

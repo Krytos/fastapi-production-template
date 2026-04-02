@@ -1,14 +1,16 @@
 """API authentication dependencies."""
 
-
 import secrets
 
-from fastapi import Header, HTTPException, status
+from fastapi import HTTPException, Security, status
+from fastapi.security import APIKeyHeader
 
 from fastapi_production_template.core.settings import get_settings
 
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 
-async def require_api_key(x_api_key: str | None = Header(default=None)) -> None:
+
+async def require_api_key(x_api_key: str | None = Security(api_key_header)) -> None:
     """Validate `X-API-Key` header against configured key."""
 
     expected = get_settings().api_key

@@ -1,6 +1,5 @@
 """Application factory and FastAPI setup."""
 
-
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -24,10 +23,9 @@ async def lifespan(app: FastAPI):
     app.state.engine = engine
     app.state.session_factory = create_postgres_session_factory(engine=engine)
 
-    # SQLite is used in local tests; migrations are the source of truth for production DB setup.
-    if settings.database_url.startswith("sqlite+"):
-        async with engine.begin() as connection:
-            await connection.run_sync(Base.metadata.create_all)
+    # PoC template mode: create schema at startup from ORM metadata.
+    async with engine.begin() as connection:
+        await connection.run_sync(Base.metadata.create_all)
     try:
         yield
     finally:

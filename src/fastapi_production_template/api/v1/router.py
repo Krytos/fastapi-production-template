@@ -1,6 +1,5 @@
 """Versioned API routes."""
 
-
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Response
@@ -66,7 +65,7 @@ def build_router(*, settings: Settings, document_service: DocumentService, metri
     async def list_documents(
         repository: Annotated[DocumentRepository, Depends(get_document_repository)],
     ) -> DocumentListResponse:
-        records = await repository.list()
+        records = await repository.list_documents()
         return DocumentListResponse(documents=[_to_record_response(record) for record in records])
 
     @router.get("/documents/{document_id}", response_model=DocumentResponse, dependencies=protected)

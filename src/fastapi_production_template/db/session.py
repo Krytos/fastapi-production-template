@@ -1,6 +1,5 @@
 """Dependency utilities for db sessions and repositories."""
 
-
 from collections.abc import AsyncGenerator
 from typing import Annotated
 

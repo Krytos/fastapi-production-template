@@ -18,8 +18,7 @@ Production-ready FastAPI starter focused on clean architecture, strict quality g
 - App factory setup with versioned API routes (`/api/v1`)
 - Typed request/response models and domain layer separation
 - SQLAlchemy async ORM + repository-backed document workflows
-- DB lifecycle wiring with dependency injection
-- Alembic migrations (`alembic.ini` + initial documents migration)
+- PoC-mode DB lifecycle wiring with dependency injection and startup schema creation
 - API key auth (`X-API-Key`) for document endpoints
 - Structured JSON logging + request ID middleware (`X-Request-ID`)
 - Lightweight Prometheus-style metrics endpoint
@@ -46,7 +45,6 @@ Production-ready FastAPI starter focused on clean architecture, strict quality g
 
 ```bash
 uv sync --all-groups
-uv run alembic upgrade head
 uv run uvicorn fastapi_production_template.main:app --reload
 ```
 
@@ -63,6 +61,13 @@ uv run pytest
 uv run ruff check .
 uv run ty check .
 uv run tox
+```
+
+Pre-commit hooks (Ruff, unit tests, Terraform fmt check):
+
+```bash
+uv run pre-commit install
+uv run pre-commit run --all-files
 ```
 
 ## Docker
@@ -88,13 +93,6 @@ terraform -chdir=infra/terraform-azure init
 terraform -chdir=infra/terraform-azure validate
 terraform -chdir=infra/terraform-gcp init
 terraform -chdir=infra/terraform-gcp validate
-```
-
-## Migrations
-
-```bash
-uv run alembic upgrade head
-uv run alembic downgrade -1
 ```
 
 ## Freelance work

@@ -17,11 +17,14 @@ def test_health(client: TestClient) -> None:
 def test_metrics_open_and_contains_counters(client: TestClient) -> None:
     health_response = client.get("/api/v1/health")
     assert health_response.status_code == 200
+    not_found_response = client.get("/api/v1/not-a-real-route")
+    assert not_found_response.status_code == 404
     response = client.get("/api/v1/metrics")
     assert response.status_code == 200
     assert "# HELP http_requests_total" in response.text
     assert 'http_requests_total{method="GET",path="/api/v1/health",status="200"}' in response.text
     assert 'http_request_duration_seconds_total{method="GET",path="/api/v1/health",status="200"}' in response.text
+    assert 'http_requests_total{method="GET",path="/api/v1/not-a-real-route",status="404"}' in response.text
     assert "http_requests_in_flight" in response.text
 
 
@@ -94,6 +97,12 @@ def test_document_crud_and_analyze(client: TestClient, api_key: str) -> None:
 
     missing_delete_response = client.delete("/api/v1/documents/missing", headers=_auth_headers(api_key))
     assert missing_delete_response.status_code == 404
+
+    metrics_response = client.get("/api/v1/metrics")
+    assert metrics_response.status_code == 200
+    assert (
+        'http_requests_total{method="GET",path="/api/v1/documents/{document_id}",status="200"}' in metrics_response.text
+    )
 
 
 def test_request_id_header_echo(client: TestClient) -> None:

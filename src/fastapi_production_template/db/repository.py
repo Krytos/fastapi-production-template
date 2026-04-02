@@ -1,6 +1,5 @@
 """Async repository for document persistence."""
 
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -40,12 +39,7 @@ class DocumentRepository:
         await self._session.commit()
         return True
 
-    async def list(self, *, limit: int = 100, offset: int = 0) -> list[DocumentRecord]:
-        stmt = (
-            select(DocumentRecord)
-            .order_by(DocumentRecord.created_at.desc())
-            .limit(limit)
-            .offset(offset)
-        )
+    async def list_documents(self, *, limit: int = 100, offset: int = 0) -> list[DocumentRecord]:
+        stmt = select(DocumentRecord).order_by(DocumentRecord.created_at.desc()).limit(limit).offset(offset)
         result = await self._session.execute(stmt)
         return list(result.scalars().all())

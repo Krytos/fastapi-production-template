@@ -39,4 +39,3 @@ def test_analyze_fallback_strategy() -> None:
     service = create_document_service()
     result = service.analyze_document(content="content", strategy="custom")
     assert result.result == "Fallback strategy 'custom' used"
-

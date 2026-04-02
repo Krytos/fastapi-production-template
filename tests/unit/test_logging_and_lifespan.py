@@ -20,8 +20,9 @@ def test_configure_logging_emits_json(capsys) -> None:
     assert payload["record"]["extra"]["request_id"] is None
 
 
-def test_app_lifespan_non_sqlite_database_url(tmp_path: Path, monkeypatch) -> None:
-    monkeypatch.setenv("DATABASE_URL", "postgresql+asyncpg://fastapi:fastapi@localhost:5432/fastapi_template")
+def test_app_lifespan_creates_schema_from_models(tmp_path: Path, monkeypatch) -> None:
+    database_path = tmp_path / "lifespan.db"
+    monkeypatch.setenv("DATABASE_URL", f"sqlite+aiosqlite:///{database_path.as_posix()}")
     monkeypatch.setenv("API_KEY", "test-api-key")
     monkeypatch.setenv("LOG_LEVEL", "INFO")
     monkeypatch.setenv("APP_NAME", "FastAPI Production Template (Lifespan)")
@@ -32,4 +33,5 @@ def test_app_lifespan_non_sqlite_database_url(tmp_path: Path, monkeypatch) -> No
         response = client.get("/api/v1/health")
         assert response.status_code == 200
 
+    assert database_path.exists()
     get_settings.cache_clear()

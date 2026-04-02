@@ -8,7 +8,6 @@ authors = [
     { name = "Kevin Meinon", email = "kevin@meinon.de" },
 ]
 dependencies = [
-    "alembic>=1.16.0",
     "asyncpg>=0.30.0",
     "fastapi>=0.115.0",
     "loguru>=0.7.3",
@@ -22,6 +21,7 @@ dependencies = [
 dev = [
     "aiosqlite>=0.21.0",
     "httpx>=0.28.0",
+    "pre-commit>=4.2.0",
     "pytest>=8.3.0",
     "pytest-cov>=6.1.0",
     "ruff>=0.12.0",
