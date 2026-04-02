@@ -1,21 +1,8 @@
-"""Domain entities and request/response models."""
+"""Domain request/response models."""
 
-from dataclasses import dataclass
+from datetime import datetime
 
 from pydantic import BaseModel, Field
-
-
-@dataclass(kw_only=True)
-class Document:
-    """Internal domain model for a document.
-
-    Args:
-        document_id (str): Stable document identifier.
-        content (str): Raw document content.
-    """
-
-    document_id: str
-    content: str
 
 
 class AnalyzeRequest(BaseModel):
@@ -56,6 +43,34 @@ class DocumentResponse(BaseModel):
     document_id: str
     preview: str
     characters: int
+
+
+class DocumentCreateRequest(BaseModel):
+    """Input payload for document creation."""
+
+    document_id: str = Field(min_length=1, max_length=64)
+    content: str = Field(min_length=1, max_length=5000)
+
+
+class DocumentUpdateRequest(BaseModel):
+    """Input payload for document updates."""
+
+    content: str = Field(min_length=1, max_length=5000)
+
+
+class DocumentRecordResponse(BaseModel):
+    """Document payload backed by database persistence."""
+
+    document_id: str
+    content: str
+    created_at: datetime
+    updated_at: datetime
+
+
+class DocumentListResponse(BaseModel):
+    """Response payload for list endpoint."""
+
+    documents: list[DocumentRecordResponse]
 
 
 class HealthResponse(BaseModel):

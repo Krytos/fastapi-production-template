@@ -42,6 +42,12 @@ def create_postgres_async_engine(*, database_url: str, echo: bool = False) -> As
     return create_async_engine(normalized_url, echo=echo, pool_pre_ping=True)
 
 
+def create_async_database_engine(*, database_url: str, echo: bool = False) -> AsyncEngine:
+    """Create a SQLAlchemy async engine for any supported async backend."""
+
+    return create_async_engine(database_url, echo=echo, pool_pre_ping=True)
+
+
 def create_postgres_session_factory(*, engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:
     """Create session factory bound to a postgres async engine.
 

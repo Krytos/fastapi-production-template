@@ -17,8 +17,12 @@ Production-ready FastAPI starter focused on clean architecture, strict quality g
 
 - App factory setup with versioned API routes (`/api/v1`)
 - Typed request/response models and domain layer separation
-- Service layer with seeded example document workflows
-- Async database engine/session module
+- SQLAlchemy async ORM + repository-backed document workflows
+- DB lifecycle wiring with dependency injection
+- Alembic migrations (`alembic.ini` + initial documents migration)
+- API key auth (`X-API-Key`) for document endpoints
+- Structured JSON logging + request ID middleware (`X-Request-ID`)
+- Lightweight Prometheus-style metrics endpoint
 - Quality checks wired for linting, typing, tests, and coverage gate
 - Terraform starter modules for container registry setup:
   - AWS ECR
@@ -28,14 +32,28 @@ Production-ready FastAPI starter focused on clean architecture, strict quality g
 ## API endpoints
 
 - `GET /api/v1/health`
+- `GET /api/v1/metrics`
 - `POST /api/v1/documents/analyze`
+- `POST /api/v1/documents`
+- `GET /api/v1/documents`
 - `GET /api/v1/documents/{document_id}`
+- `PUT /api/v1/documents/{document_id}`
+- `DELETE /api/v1/documents/{document_id}`
+
+`/health` and `/metrics` are public. All `/documents*` routes require `X-API-Key`.
 
 ## Local development
 
 ```bash
 uv sync --all-groups
+uv run alembic upgrade head
 uv run uvicorn fastapi_production_template.main:app --reload
+```
+
+Example authenticated request:
+
+```bash
+curl -H "X-API-Key: dev-api-key" http://localhost:8000/api/v1/documents
 ```
 
 ## Tests and quality gates
@@ -70,6 +88,13 @@ terraform -chdir=infra/terraform-azure init
 terraform -chdir=infra/terraform-azure validate
 terraform -chdir=infra/terraform-gcp init
 terraform -chdir=infra/terraform-gcp validate
+```
+
+## Migrations
+
+```bash
+uv run alembic upgrade head
+uv run alembic downgrade -1
 ```
 
 ## Freelance work

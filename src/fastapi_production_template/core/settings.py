@@ -1,47 +1,29 @@
 """Application settings management."""
 
-from dataclasses import dataclass
-from os import getenv
+from functools import lru_cache
+
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-@dataclass(kw_only=True)
-class Settings:
-    """Runtime settings loaded from environment variables.
+class Settings(BaseSettings):
+    """Runtime settings loaded from environment variables."""
 
-    Args:
-        app_name (str): Public application name.
-        environment (str): Deployment environment identifier.
-        database_url (str): SQLAlchemy-compatible database URL.
-        api_prefix (str): API route prefix.
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    Side Effects:
-        Reads process environment variables.
-    """
-
-    app_name: str
-    environment: str
-    database_url: str
-    api_prefix: str
+    app_name: str = Field(default="FastAPI Production Template", alias="APP_NAME")
+    environment: str = Field(default="development", alias="ENVIRONMENT")
+    database_url: str = Field(
+        default="postgresql+asyncpg://fastapi:fastapi@localhost:5432/fastapi_template",
+        alias="DATABASE_URL",
+    )
+    api_prefix: str = Field(default="/api/v1", alias="API_PREFIX")
+    api_key: str = Field(default="dev-api-key", alias="API_KEY")
+    log_level: str = Field(default="INFO", alias="LOG_LEVEL")
 
 
+@lru_cache(maxsize=1)
 def get_settings() -> Settings:
-    """Create settings from environment variables.
+    """Load and cache application settings."""
 
-    Returns:
-        Settings: Loaded and normalized settings object.
-
-    Side Effects:
-        Reads process environment variables.
-    """
-
-    environment: str = getenv("ENVIRONMENT", "development")
-    database_url: str = getenv(
-        "DATABASE_URL",
-        "postgresql+asyncpg://fastapi:fastapi@localhost:5432/fastapi_template",
-    )
-    return Settings(
-        app_name=getenv("APP_NAME", "FastAPI Production Template"),
-        environment=environment,
-        database_url=database_url,
-        api_prefix=getenv("API_PREFIX", "/api/v1"),
-    )
+    return Settings()

@@ -8,6 +8,8 @@ services:
       ENVIRONMENT: "development"
       API_PREFIX: "/api/v1"
       DATABASE_URL: "postgresql+asyncpg://fastapi:fastapi@postgres:5432/fastapi_template"
+      API_KEY: "dev-api-key"
+      LOG_LEVEL: "INFO"
     ports:
       - "8000:8000"
     depends_on:
@@ -24,6 +26,8 @@ services:
       ENVIRONMENT: "development"
       API_PREFIX: "/api/v1"
       DATABASE_URL: "postgresql+asyncpg://fastapi:fastapi@postgres:5432/fastapi_template"
+      API_KEY: "dev-api-key"
+      LOG_LEVEL: "INFO"
     ports:
       - "8001:8000"
     depends_on:

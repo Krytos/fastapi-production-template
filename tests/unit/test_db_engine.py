@@ -3,6 +3,7 @@
 import pytest
 
 from fastapi_production_template.db.engine import (
+    create_async_database_engine,
     create_postgres_async_engine,
     create_postgres_session_factory,
     normalize_postgres_async_url,
@@ -43,3 +44,10 @@ def test_create_postgres_session_factory_binds_engine() -> None:
     engine = create_postgres_async_engine(database_url="postgresql://user:pass@localhost:5432/app")
     session_factory = create_postgres_session_factory(engine=engine)
     assert session_factory.kw["bind"] is engine
+
+
+def test_create_async_database_engine_supports_sqlite() -> None:
+    """Create generic async engine for non-postgres backends."""
+
+    engine = create_async_database_engine(database_url="sqlite+aiosqlite:///./test.db")
+    assert str(engine.url) == "sqlite+aiosqlite:///./test.db"

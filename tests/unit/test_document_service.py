@@ -1,6 +1,6 @@
 """Unit tests for document service."""
 
-from fastapi_production_template.services.document_service import create_seeded_service
+from fastapi_production_template.services.document_service import create_document_service
 
 
 def test_analyze_summary_strategy() -> None:
@@ -10,7 +10,7 @@ def test_analyze_summary_strategy() -> None:
         None: No return value.
     """
 
-    service = create_seeded_service()
+    service = create_document_service()
     result = service.analyze_document(content="one two three", strategy="summary")
     assert result.strategy == "summary"
     assert result.word_count == 3
@@ -24,7 +24,7 @@ def test_analyze_keywords_strategy() -> None:
         None: No return value.
     """
 
-    service = create_seeded_service()
+    service = create_document_service()
     result = service.analyze_document(content="Beta alpha beta", strategy="keywords")
     assert result.result == "Keywords: alpha, beta"
 
@@ -36,31 +36,7 @@ def test_analyze_fallback_strategy() -> None:
         None: No return value.
     """
 
-    service = create_seeded_service()
+    service = create_document_service()
     result = service.analyze_document(content="content", strategy="custom")
     assert result.result == "Fallback strategy 'custom' used"
 
-
-def test_get_document_found() -> None:
-    """Return mapped projection when document exists.
-
-    Returns:
-        None: No return value.
-    """
-
-    service = create_seeded_service()
-    result = service.get_document(document_id="doc-001")
-    assert result is not None
-    assert result.document_id == "doc-001"
-    assert result.characters > 0
-
-
-def test_get_document_missing() -> None:
-    """Return None for unknown document identifier.
-
-    Returns:
-        None: No return value.
-    """
-
-    service = create_seeded_service()
-    assert service.get_document(document_id="does-not-exist") is None
