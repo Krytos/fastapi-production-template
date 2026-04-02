@@ -1,0 +1,101 @@
+[project]
+name = "fastapi-production-template"
+version = "0.1.0"
+description = "Production-ready FastAPI template with CI/CD, Terraform, and complete tests"
+readme = "README.md"
+requires-python = ">=3.14"
+authors = [
+    { name = "Kevin Meinon", email = "kevin@meinon.de" },
+]
+dependencies = [
+    "asyncpg>=0.30.0",
+    "fastapi>=0.115.0",
+    "pydantic>=2.11.0",
+    "pydantic-settings>=2.8.0",
+    "sqlalchemy>=2.0.40",
+    "uvicorn[standard]>=0.34.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.0",
+    "pytest>=8.3.0",
+    "pytest-cov>=6.1.0",
+    "ruff>=0.12.0",
+    "tox>=4.24.0",
+    "ty>=0.0.1a17",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.13,<0.12"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+fix = true
+show-fixes = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "SIM", "UP"]
+ignore = ["E501"]
+
+[tool.ty.environment]
+python-version = "3.14"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+env_list = lint, type, unit, integration, coverage
+
+[testenv]
+package = editable
+deps =
+    pytest>=8.3.0
+    pytest-cov>=6.1.0
+    httpx>=0.28.0
+    ruff>=0.12.0
+    ty>=0.0.1a17
+
+[testenv:lint]
+description = Run Ruff lint checks
+commands =
+    ruff check .
+
+[testenv:type]
+description = Run type checks
+commands =
+    ty check .
+
+[testenv:unit]
+description = Run unit tests
+commands =
+    pytest tests/unit
+
+[testenv:integration]
+description = Run integration tests
+commands =
+    pytest tests/integration
+
+[testenv:coverage]
+description = Run coverage gate
+commands =
+    pytest --cov=src --cov-branch --cov-report=term-missing --cov-fail-under=100
+"""

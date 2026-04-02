@@ -1,0 +1,62 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APP_NAME: "FastAPI Production Template"
+      ENVIRONMENT: "development"
+      API_PREFIX: "/api/v1"
+      DATABASE_URL: "postgresql+asyncpg://fastapi:fastapi@postgres:5432/fastapi_template"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["uvicorn", "fastapi_production_template.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    environment:
+      APP_NAME: "FastAPI Production Template"
+      ENVIRONMENT: "development"
+      API_PREFIX: "/api/v1"
+      DATABASE_URL: "postgresql+asyncpg://fastapi:fastapi@postgres:5432/fastapi_template"
+    ports:
+      - "8001:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    profiles:
+      - dev
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: sync
+          path: ./tests
+          target: /app/tests
+        - action: sync+restart
+          path: ./pyproject.toml
+          target: /app/pyproject.toml
+        - action: rebuild
+          path: ./Dockerfile
+        - action: rebuild
+          path: ./README.md
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: "fastapi_template"
+      POSTGRES_USER: "fastapi"
+      POSTGRES_PASSWORD: "fastapi"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fastapi -d fastapi_template"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

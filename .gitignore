@@ -1,0 +1,12 @@
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+.venv/
+*.pyc
+.env
+.terraform/
+*.tfstate
+*.tfstate.*
+dist/
