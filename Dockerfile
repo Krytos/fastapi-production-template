@@ -8,7 +8,7 @@ WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY src ./src
 
-RUN uv pip sync
+RUN uv sync
 
 EXPOSE 8000
 
