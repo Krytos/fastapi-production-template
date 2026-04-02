@@ -1,5 +1,24 @@
 # FastAPI Production Template
 
+[![CI](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/ci.yml?branch=main&label=ci-cd)](https://github.com/Krytos/fastapi-production-template/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Krytos/fastapi-production-template/tests.yml?branch=main&label=tests)](https://github.com/Krytos/fastapi-production-template/actions/workflows/tests.yml)
+[![PyPI version](https://img.shields.io/pypi/v/fastapi-production-template)](https://pypi.org/project/fastapi-production-template/)
+[![Python versions](https://img.shields.io/pypi/pyversions/fastapi-production-template)](https://pypi.org/project/fastapi-production-template/)
+[![Coverage gate](https://img.shields.io/badge/coverage%20gate-100%25-brightgreen)](https://github.com/Krytos/fastapi-production-template/blob/main/pyproject.toml)
+[![Code style: Ruff](https://img.shields.io/badge/lint-ruff-46a758)](https://github.com/astral-sh/ruff)
+[![Type checking: Ty](https://img.shields.io/badge/types-ty-0f172a)](https://github.com/astral-sh/ty)
+[![Publish: PyPI](https://img.shields.io/badge/publish-pypi-blue)](https://github.com/Krytos/fastapi-production-template/blob/main/.github/workflows/ci.yml)
+[![Package manager: uv](https://img.shields.io/badge/package%20manager-uv-DE5FE9)](https://github.com/astral-sh/uv)
+[![Framework: FastAPI](https://img.shields.io/badge/framework-fastapi-009688)](https://fastapi.tiangolo.com/)
+[![ORM: SQLAlchemy](https://img.shields.io/badge/orm-sqlalchemy-d71f00)](https://www.sqlalchemy.org/)
+[![Database: PostgreSQL](https://img.shields.io/badge/database-postgresql-336791)](https://www.postgresql.org/)
+[![Infra: Terraform](https://img.shields.io/badge/infra-terraform-844FBA)](https://www.terraform.io/)
+[![Container: Docker](https://img.shields.io/badge/container-docker-2496ED)](https://www.docker.com/)
+
+[![Open for Freelance](https://img.shields.io/badge/open%20for-freelance%20projects-success)](mailto:kevin@meinon.de?subject=FastAPI%20Freelance%20Inquiry)
+[![Hire Me](https://img.shields.io/badge/hire%20me-fastapi%20backend-0ea5e9)](mailto:kevin@meinon.de?subject=Backend%20Project%20Inquiry)
+[![Contact](https://img.shields.io/badge/contact-kevin%40meinon.de-blue)](mailto:kevin@meinon.de)
+
 Production-ready FastAPI starter focused on clean architecture, strict quality gates, and cloud-ready infrastructure baselines.
 
 ## Tech stack
